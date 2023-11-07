@@ -1,4 +1,4 @@
-package org.example.FinalExam;
+package org.example.FinalExamUIAutomation;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -13,7 +13,9 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class SearchTransactionFlow {
+import static org.testng.Assert.assertTrue;
+
+public class Notifications {
     WebDriver driver;
     WebDriverWait wait;
 
@@ -26,7 +28,7 @@ public class SearchTransactionFlow {
     }
 
     @Test
-    void SearchTest() throws InterruptedException {
+    void NotiicationTest() throws InterruptedException {
         WebElement usernameField = driver.findElement(By.cssSelector("input[id='username']"));
         WebElement passwordField = driver.findElement(By.id("password"));
 
@@ -41,20 +43,16 @@ public class SearchTransactionFlow {
 
         Thread.sleep(3000);
 
-        WebElement newButton = driver.findElement(By.cssSelector("[data-test='nav-top-new-transaction']"));
-        newButton.click();
+        WebElement notificationsButton = driver.findElement(By.cssSelector("[data-test='nav-top-notifications-link']"));
+        notificationsButton.click();
 
-        WebElement clientSearchBox = driver.findElement(By.id("user-list-search-input"));
-        clientSearchBox.sendKeys("Mladjo");
+        WebElement noNotiications = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-test='empty-list-header']")));
 
-        WebElement client = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(" //span[text()='Mladjo']")));
-        client.click();
-
-        Thread.sleep(3000);
-
-
+        Thread.sleep(6000);
     }
+
     @AfterTest
     void tearDown(){
         driver.quit();}
+
 }

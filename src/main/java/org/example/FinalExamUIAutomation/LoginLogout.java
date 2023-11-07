@@ -1,4 +1,4 @@
-package org.example.FinalExam;
+package org.example.FinalExamUIAutomation;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;

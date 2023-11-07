@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Testing qacademy app" parallel="classes">
+    <listeners>
+        <listener class-name="org.testng.reporters.EmailableReporter"></listener>
+    </listeners>
+    <test name="FinalExamUIAutomation">
+        <classes>
+            <class name="org.example.API.DeleteRequests"></class>
+            <class name="org.example.API.GetRequests"></class>
+            <class name="org.example.API.PatchRequests"></class>
+            <class name="org.example.API.PostRequests"></class>
+            <class name="org.example.API.PutRequests"></class>
+            <class name="org.example.API.RestAssuredCrocs"></class>
+
+        </classes>
+    </test> <!-- Test -->
+    <parameter name="output-directory" value="Rest Assured tests"></parameter>
+</suite> <!-- Suite -->

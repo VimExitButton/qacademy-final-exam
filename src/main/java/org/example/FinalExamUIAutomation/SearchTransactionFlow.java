@@ -1,10 +1,11 @@
-package org.example.FinalExam;
+package org.example.FinalExamUIAutomation;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -12,9 +13,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-import static org.testng.Assert.assertTrue;
-
-public class BankAccounts {
+public class SearchTransactionFlow {
     WebDriver driver;
     WebDriverWait wait;
 
@@ -27,7 +26,7 @@ public class BankAccounts {
     }
 
     @Test
-    void BankAccountTest() throws InterruptedException{
+    void SearchTest() throws InterruptedException {
         WebElement usernameField = driver.findElement(By.cssSelector("input[id='username']"));
         WebElement passwordField = driver.findElement(By.id("password"));
 
@@ -42,41 +41,20 @@ public class BankAccounts {
 
         Thread.sleep(3000);
 
-        WebElement bankAccButton = driver.findElement(By.cssSelector("[data-test='sidenav-bankaccounts']"));
-         bankAccButton.click();
+        WebElement newButton = driver.findElement(By.cssSelector("[data-test='nav-top-new-transaction']"));
+        newButton.click();
 
-        Thread.sleep(2000);
+        WebElement clientSearchBox = driver.findElement(By.id("user-list-search-input"));
+        clientSearchBox.sendKeys("Mladjo");
 
-        WebElement createBankAcc = driver.findElement(By.cssSelector("[data-test='bankaccount-new']"));
-        createBankAcc.click();
+        WebElement client = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(" //span[text()='Mladjo']")));
+        client.click();
 
-        WebElement bankNameField = driver.findElement(By.cssSelector("input[id='bankaccount-bankName-input']"));
-        WebElement routingNumberField = driver.findElement(By.id("bankaccount-routingNumber-input"));
-        WebElement accountNumberField = driver.findElement(By.id("bankaccount-accountNumber-input"));
-
-        bankNameField.sendKeys("Pineapple");
-        routingNumberField.sendKeys("123456789");
-        accountNumberField.sendKeys("1234asdfg");
-
-        WebElement saveButton = driver.findElement(By.xpath("//button[@type='submit']"));
-        saveButton.click();
-
-        Thread.sleep(2000);
+        Thread.sleep(3000);
 
 
     }
-    @Test
-    void deleteAccount () throws InterruptedException {
-        WebElement deleteButton = driver.findElement(By.cssSelector("[data-test='bankaccount-delete']"));
-        deleteButton.click();
-
-        Thread.sleep(6000);
-
-    }
-
     @AfterTest
     void tearDown(){
         driver.quit();}
-
-
 }
